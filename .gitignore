@@ -328,3 +328,10 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+## Ignore MATLAB temporary files, images, and report files.
+*.asv
+*.fig
+*.png
+*.doc
+*.docx
