@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Test2First
+namespace Test2
 {
 	/// <summary>
 	/// The Program class
