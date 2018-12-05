@@ -13,7 +13,7 @@ namespace Test3
 		/// <param name="args">Input args of programm</param>
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			Console.WriteLine("Minimum states of test FSA is " + Minimization.MinimizeStates(new TestAutomaton()));
 		}
 	}
 }
