@@ -1,31 +1,28 @@
 ﻿namespace FSA
 {
 	/// <summary>
-	/// Finite-state automaton
+	/// Finite-state automaton for numbers
 	/// </summary>
-	public class Automaton
+	public class DigitAutomaton : IAutomaton
 	{
-		private const int error = -1;
-		private const int numbers = 10;
+		public int[][] AutomatonTable => automaton;
+		public int[] FinalStates => finalStates;
 		private enum QState { Start, Minus, Number, Dot, Fraction, E, Sign, Degree, MaxState };
 		private enum Symbols { Plus = 10, Minus, Dot, E, MaxSymbol };
+		private const int error = -1;
+		private const int numbers = 10;
 		private readonly int[][] automaton;
-		private readonly int[] finalState;
+		private readonly int[] finalStates;
 
 		/// <summary>
-		/// Automaton constructor 
+		/// Digit automaton constructor 
 		/// </summary>
-		public Automaton()
+		public DigitAutomaton()
 		{
 			automaton = CreateMachine();
-			finalState = CreateFinalStates();
+			finalStates = CreateFinalStates();
 		}
 
-		/// <summary>
-		/// Check word at the FSA
-		/// </summary>
-		/// <param name="word">Input word</param>
-		/// <returns>Check result</returns>
 		public bool CheckWord(string word)
 		{
 			int[] str = StringWordToInt(word);
@@ -40,9 +37,9 @@
 				}
 			}
 
-			for (int i = 0; i < finalState.Length; i++)
+			for (int i = 0; i < finalStates.Length; i++)
 			{
-				if (q == finalState[i])
+				if (q == finalStates[i])
 				{
 					return true;
 				}
@@ -60,7 +57,9 @@
 				machine[i] = new int[(int)QState.MaxState];
 
 				for (int j = 0; j < machine[i].Length; j++)
+				{
 					machine[i][j] = error;
+				}
 			}
 
 			machine[(int)Symbols.Minus][(int)QState.Start] = 1;

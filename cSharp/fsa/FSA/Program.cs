@@ -13,7 +13,7 @@ namespace FSA
 		/// <param name="args">Input args of programm</param>
 		public static void Main(string[] args)
 		{
-			Automaton fsa = new Automaton();
+			IAutomaton fsa = new DigitAutomaton();
 			string toCheck = "-1";
 
 			Console.WriteLine("Checking \"" + toCheck + "\", result is " + fsa.CheckWord(toCheck));
