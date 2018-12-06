@@ -1,2 +1,2 @@
 function y = f(x)
-    y = cos(x) - 1 ./ cosh(x) + 1;
+    y = log(1 + x);
