@@ -6,7 +6,12 @@ init()
     PORT="6667"
     NICK="IRC_Bot"
     CHANNEL="#UX32VD/IRC_Test"
-    PREFIX="IRC"
+    DIR="./command"
+    PREFIX="irc"
+    
+    if ! [ -d $DIR ] ; then
+        mkdir $DIR
+    fi
     
     exec 3>&-
     exec 3<>/dev/tcp/$SERVER/$PORT
@@ -21,33 +26,71 @@ send()
     echo "PRIVMSG $CHANNEL :$@" >&3
 }
 
+command()
+{
+    CMD=`expr "$1" : '\([a-zA-Z0-9_-]* *\)'`
+    CMD=${CMD,,}
+    CMD=${CMD%% *}
+}
+
 message()
 {
     FROM=${1%%!*} FROM=${FROM:1}
     TO=$3
     MSG=$@ MSG=${MSG#\:*\:}
     
-    case ${MSG^^} in
+    case ${MSG,,} in
         $PREFIX* )
-            MSG=${MSG#[A-Z]* }
+            MSG=${MSG#[a-zA-Z0-9_-]* }
+            command $MSG
+            MSG=${MSG#[a-zA-Z0-9_-]* }
             ;;
         * )
             return 1
             ;;
     esac
     
-    case ${MSG^^} in
-        "ECHO"* )
-            send ${MSG:4}
+    case $CMD in
+        "echo" )
+            send $MSG
             ;;
-        "ME"* )
-            send "You are $FROM"
+        "nick" )
+            send "Your nick - $FROM"
             ;;
-        "HI"* )
-            send "Hello, It's me, I'm just a little irc"
+        "off" )
+            send "Shutdown"
+            echo "QUIT" >&3
+            exit 0
             ;;
-        "SAY"* )
-            send "No..."
+        "help" )
+            send "Command list: echo nick off new remove" `ls $DIR`
+            ;;
+        "new" )
+            command $MSG
+            
+            if ! [ -f $DIR/$CMD ] ; then
+                send "New command $CMD"
+                echo ${MSG#[a-zA-Z0-9_-]* } > "$DIR/$CMD"
+            else
+                send "Command exist!"
+            fi
+            ;;
+        "remove" )
+            command $MSG
+            
+            if [ -f $DIR/$CMD ] ; then
+                send "Command delete"
+                rm $DIR/$CMD
+            else
+                send "Command not found!"
+            fi
+            ;;
+        * )
+            if [ -f $DIR/$CMD ] ; then
+                send `cat $DIR/$CMD`
+            else
+                send "Command not found!"
+            fi
             ;;
     esac
 }
