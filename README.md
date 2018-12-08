@@ -7,3 +7,4 @@
 - [Базы данных](https://github.com/Victor-Y-Fadeev/Learning/tree/master/sql), преподаватель [Елена Георгиевна Михайлова](https://sites.google.com/site/egmichailova/)
 - [Вычислительные методы](https://github.com/Victor-Y-Fadeev/Learning/tree/master/matlab), преподаватель [Алексей Николаевич Борзых](http://borz.ru/)
 - [Теория трансляций](https://github.com/Victor-Y-Fadeev/Learning/tree/master/cSharp), преподаватель Людмила Николаевна Федорченко
+- [Компьютерные сети](https://github.com/Victor-Y-Fadeev/Learning/tree/master/irc), преподаватель Илья Валерьевич Зеленчук
