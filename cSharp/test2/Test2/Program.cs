@@ -33,7 +33,13 @@ namespace Test2
 		/// <param name="args">Input args of programm</param>
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("Separation of (5, 5) is " + FindSeparation(5, 5));
+			Console.Write("Enter rectangle (i, j): ");
+
+			string[] temp = Console.ReadLine().Split(' ');
+			int i = Convert.ToInt32(temp[0]);
+			int j = Convert.ToInt32(temp[1]);
+
+			Console.WriteLine("Separation of (" + i + ", " + j + ") is " + FindSeparation(i, j));
 		}
 	}
 }

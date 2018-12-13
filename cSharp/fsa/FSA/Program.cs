@@ -14,8 +14,9 @@ namespace FSA
 		public static void Main(string[] args)
 		{
 			IAutomaton fsa = new DigitAutomaton();
-			string toCheck = "-1";
-
+			Console.Write("Enter number: ");
+			string toCheck = Console.ReadLine();
+			
 			Console.WriteLine("Checking \"" + toCheck + "\", result is " + fsa.CheckWord(toCheck));
 		}
 	}

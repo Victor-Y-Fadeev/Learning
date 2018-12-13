@@ -62,7 +62,7 @@
 				}
 			}
 
-			machine[(int)Symbols.Minus][(int)QState.Start] = 1;
+			machine[(int)Symbols.Minus][(int)QState.Start] = (int)QState.Minus;
 
 			for (int i = 0; i < numbers; i++)
 			{

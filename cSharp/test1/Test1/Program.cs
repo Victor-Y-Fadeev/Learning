@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Test1
 {
@@ -21,19 +24,21 @@ namespace Test1
 
 			for (int i = 0; i < lines.Length; i++)
 			{
-				string[] words = lines[i].Split(' ');
+				Match m = Regex.Match(lines[i], "[a-zA-Z0-9_а-яА-Я]+");
 
-				for (int j = 0; j < words.Length; j++)
+				while (m.Success)
 				{
 					try
 					{
-						result[words[j]].Add(i);
+						result[m.Value].Add(i);
 					}
 					catch (KeyNotFoundException)
 					{
-						result.Add(words[j], new SortedSet<int>());
-						result[words[j]].Add(i);
+						result.Add(m.Value, new SortedSet<int>());
+						result[m.Value].Add(i);
 					}
+
+					m = m.NextMatch();
 				}
 			}
 
@@ -46,7 +51,8 @@ namespace Test1
 		/// <param name="args">Input args of programm</param>
 		public static void Main(string[] args)
 		{
-			SortedDictionary<string, SortedSet<int>> result = Inclusion("i d d\nd a c\na b a");
+			string input = File.ReadAllText("text.txt");
+			SortedDictionary<string, SortedSet<int>> result = Inclusion(input);
 
 			for (int i = 0; i < result.Keys.Count; i++)
 			{

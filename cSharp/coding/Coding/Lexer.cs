@@ -18,7 +18,7 @@ namespace Coding
 		{
 			Match m = Regex.Match(input.ToString(), pattern);
 
-			Dictionary<string, int> table = new Dictionary<string, int>();
+			SortedDictionary<string, int> table = new SortedDictionary<string, int>(new CustomComparer());
 			string firstSpace = " ";
 
 			if (code == firstNonTerminalCode)
@@ -92,6 +92,17 @@ namespace Coding
 			sb = SpaceCleaner(sb);
 
 			return sb.ToString();
+		}
+
+		private class CustomComparer : IComparer<string>
+		{
+			public int Compare(string x, string y)
+			{
+				if (x.Length.CompareTo(y.Length) == 0)
+					return x.CompareTo(y);
+
+				return (-1) * x.Length.CompareTo(y.Length);
+			}
 		}
 	}
 }
