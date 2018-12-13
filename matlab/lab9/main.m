@@ -5,7 +5,7 @@ function main
     L = - 0.4 + 0.4 * log(1.4) + log(1.4);
     a = 0;
     b = 0.4;
-    N = 5 : 20;
+    N = 1 : 5;
     for i = N
         A(i - N(1) + 1) = abs(L - legendre(a, b, i));
         T(i - N(1) + 1) = f_2n_xi(a, b, i) * power(b - a, 2 * i + 1) * power(factorial(i), 4) / ((2 * i + 1) * power(factorial(2 * i), 3));
@@ -15,7 +15,7 @@ function main
     disp(T);
         
     I = - pi * log(2);
-    a = - 1;
+    a = -1;
     b = 1;
     n = 5 : 20;
     for i = n
