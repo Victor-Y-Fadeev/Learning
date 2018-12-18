@@ -4,7 +4,8 @@ function main
     X = 1;
     h = 0.0000001;
     
-    [x, y] = runge_kutt(x0, y0, X, h);
+    [x, y] = ode45(@f, [x0 X], y0);
+    %[x, y] = runge_kutt(x0, y0, X, h);
     
     [x1, y1] = runge_kutt(x0, y0, X, 0.5);
     [x2, y2] = runge_kutt(x0, y0, X, 0.25);
@@ -15,11 +16,11 @@ function main
     plot(x, y, 'k');
     grid on;
     hold on;
-    plot(x1, y1, 'y');
-    plot(x2, y2, 'm'); 
-    plot(x3, y3, 'c');
-    plot(x4, y4, 'g');
-    plot(x5, y5, 'b');    
+    %plot(x1, y1, 'y');
+    %plot(x2, y2, 'm'); 
+    %plot(x3, y3, 'c');
+    %plot(x4, y4, 'g');
+    %plot(x5, y5, 'b');    
     legend('High resolution', 'h = 0.5', 'h = 0.25', 'h = 0.125', 'h = 0.0625', 'h = 0.03125', 'Location', 'southeast');
     
     %{
