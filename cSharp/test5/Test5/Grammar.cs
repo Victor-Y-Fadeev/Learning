@@ -136,7 +136,7 @@ namespace Test5
 					{
 						if (word[j] == b)
 						{
-							result.IntersectWith(First(word.Substring(j + 1), k));
+							result.UnionWith(First(word.Substring(j + 1), k));
 						}
 					}
 				}
@@ -151,7 +151,7 @@ namespace Test5
 					{
 						if (IsNonTerminal(word[j]))
 						{
-							result.IntersectWith(PlusK(Fi(word[j], b , k , i - 1), First(word.Substring(j + 1), k), k));
+							result.UnionWith(PlusK(Fi(word[j], b , k , i - 1), First(word.Substring(j + 1), k), k));
 						}
 					}
 				}
@@ -176,12 +176,12 @@ namespace Test5
 				foreach (string word in rules)
 				{
 					int j = 0;
-					while (j < k && IsTerminal(word[j]))
+					while (j < word.Length && j < k && IsTerminal(word[j]))
 					{
 						j++;
 					}
 
-					result.Add(word.Substring(0, j - 1));
+					result.Add(word.Substring(0, j));
 				}
 			}
 			else
@@ -196,7 +196,7 @@ namespace Test5
 						temp = PlusK(temp, F(word[j], k, i - 1), k);
 					}
 
-					result.IntersectWith(temp);
+					result.UnionWith(temp);
 				}
 			}
 
@@ -211,13 +211,20 @@ namespace Test5
 			{
 				if (word.Length >= k)
 				{
-					result.Add(word.Substring(0, k - 1));
+					result.Add(word.Substring(0, k));
 				}
 				else
 				{
 					foreach (string wordPath in l2)
 					{
-						result.Add(word + wordPath.Substring(0, k - word.Length - 1));
+						if (wordPath.Length > k - word.Length)
+						{
+							result.Add(word + wordPath.Substring(0, k - word.Length));
+						}
+						else
+						{
+							result.Add(word + wordPath);
+						}
 					}
 				}
 			}
