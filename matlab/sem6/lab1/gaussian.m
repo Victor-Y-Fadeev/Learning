@@ -1,21 +1,22 @@
 function b = gaussian(A, b)
-    % Check first zero
-    i = 1;
-    while A(i, 1) == 0
-        i = i + 1;
-    end
-    
-    % Swap zero string
-    if i ~= 1
-        for j = 1 : length(A)
-            tmp = A(1, j);
-            A(1, j) = A(i, j);
-            A(i, j) = tmp;
-        end
-    end
-
     % Get upper triangular matrix
     for i = 1 : length(A)
+        % Check first zero
+        if A(i, i) == 0
+            % Search non-zero string
+            j = i + 1;
+            while A(j, i) == 0
+                j = j + 1;
+            end
+            
+            % Swap zero string
+            for k = i : length(A)
+                tmp = A(i, k);
+                A(i, k) = A(j, k);
+                A(j, k) = tmp;
+            end
+        end        
+        
         % Dividing by first element
         b(i) = b(i) / A(i, i);
         for j = length(A) : -1 : i
