@@ -7,16 +7,17 @@ function main
     a = -5;
     b = 10;
     iter = 50;
-    x = bisection(A, a, b, iter);
-    disp(x);
     
-    %steps = 1 : iter;
-    %for i = steps
-        %actual(i) = max(abs(eigenvalues - x(:, i).'));
-    %end
+    steps = 1 : iter;
+    for i = steps        
+        x = bisection(A, a, b, i);
+        %disp(x);
+        
+        actual(i) = max(abs(eigenvalues(1 : length(x)) - x));
+    end
     
-    %semilogy(steps, actual, 'c');
-    %grid on;
-    %hold on;
-    %legend('Actual');
+    semilogy(steps, actual, 'c');
+    grid on;
+    hold on;
+    legend('Actual');
     

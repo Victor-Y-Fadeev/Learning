@@ -6,6 +6,7 @@ function changing = signs(alpha, beta, gamma)
         p(i + 2) = (alpha(i + 1) - gamma) * p(i + 1) - power(beta(i), 2) * p(i);
     end
     
+    % Counting signs changing
     changing = 0;
     for i = 1 : length(p) - 1
         if p(i) < 0 && p(i + 1) >= 0
