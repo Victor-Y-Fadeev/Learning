@@ -18,13 +18,13 @@ function [X, A, b] = iterative(A, b, iter)
     end
     
     % Alpha
-    disp(A);
+    %disp(A);
     
     % Beta
-    disp(b);
+    %disp(b);
     
     % Zero step
-    disp(X(:, 1));
+    %disp(X(:, 1));
         
     % Algo steps
     for i = 1 : iter
@@ -35,6 +35,6 @@ function [X, A, b] = iterative(A, b, iter)
         end
         
         % Step print
-        disp(X(:, i + 1));
+        %disp(X(:, i + 1));
     end
     

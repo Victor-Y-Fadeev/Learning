@@ -4,14 +4,14 @@ function main
     
     x = gaussian(A, b);
     
-    iter = 50;    
+    iter = 50;
     [X, alpha, beta] = iterative(A, b, iter);
     
     steps = 1 : iter + 1;
     for i = steps
         actual(i) = max(abs(x - X(:, i).'));
         theoretical(i) = power(inf_norm(alpha), i) * inf_norm(beta) / (1 - inf_norm(alpha));
-        residual(i) = inf_norm(b.' + A * X(:, i));
+        residual(i) = inf_norm(b.' - A * X(:, i));
     end
     
     semilogy(steps, actual, 'c');
